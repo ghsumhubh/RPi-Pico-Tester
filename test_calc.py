@@ -6,3 +6,4 @@ from sender import Sender
 s = Sender('COM5')
 s.send('2+2')
 print(s.receive())
+s.close()
