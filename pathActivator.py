@@ -54,64 +54,49 @@ class PathActivator:
 
     # Activates all the right choices to get to the selected output
     def activate_path_to(self, red_output, black_output):
-        path = self.__get_path_to(red_output, black_output)
-        # turns off all the pins
-        self.__send_message("reset()")
-        message = self.__recieve_message()
-        #I.C. in debug mode - > print
-        if (self.debug):
-            print (message)
-        
-        for pin in path:
-            # turns on only the pins in the path
-            self.__send_message("turn_on(\""+pin+"\")")
-            message = self.__recieve_message()
-            #I.C. in debug mode - > print
-            if (self.debug):
-                print (message)
+        if self.__isValid__(red_output, black_output):
+            path = self.__get_path_to(red_output, black_output)
+            self.__send_message("reset()")
+            for pin in path:
+                self.__send_message("turn_on(\""+pin+"\")")
+
         
 
 
     # Calculates all the right choices to get to the selected output
     def __get_path_to(self, red_output, black_output):
-        if self.__isValid__ (red_output, black_output) != True:
-            return []
+        # Here will be stored all the pins that need to be activated
+        path = []
+        # This handles the red output
+        if (red_output == "SUB"):
+            path.extend(PathActivator.SUB_TOP)
         else:
-            # Here will be stored all the pins that need to be activated
-            path = []
-            # This handles the red output
-            if (red_output == "SUB"):
-                path.extend(PathActivator.SUB_TOP)
-            else:
-                red_letter = red_output[0]
-                red_number = int(red_output[1:])
-                # Picks the first relay to be the pair
-                path.append(PathActivator.POS_TO_PAIR[red_output])
-                # The 2nd relay is 0 since we don't want to get SUB anyways
-                # The 3rd relay is based on the parity of the output
-                if red_number % 2:
-                    path.append(PathActivator.ODD_TOP)
-                # The 4th relay is based on whether the output is A or C
-                if red_letter == 'C':
-                    path.append(PathActivator.C_TOP)
+            #C12 -> red_letter = C, red_number=12
+            red_letter = red_output[0]
+            red_number = int(red_output[1:])
+            # Picks the first relay to be the pair corresponding to the element
+            path.append(PathActivator.POS_TO_PAIR[red_output])
+            # The 2nd relay is 0 since we don't want to get SUB anyways (But putting 1 here won't change the outcome theoretically)
+            # The 3rd relay is based on the parity of the output
+            if red_number % 2:
+                path.append(PathActivator.ODD_TOP)
+            # The 4th relay is based on whether the output is A or C
+            if red_letter == 'C':
+                path.append(PathActivator.C_TOP)
 
-            # This handles the black output
-            if (black_output == "SUB"):
-                path.extend(PathActivator.SUB_BOT)
-            else:
-                black_letter = black_output[0]
-                black_number = int(black_output[1:])
-                # Picks the first relay to be the pair
-                path.append(PathActivator.POS_TO_PAIR[black_output])
-                # The 2nd relay is 0 since we don't want to get SUB anyways
-                # The 3rd relay is based on the parity of the output
-                if black_number % 2:
-                    path.append(PathActivator.ODD_BOT)
-                # The 4th relay is based on whether the output is A or C
-                if black_letter == 'C':
-                    path.append(PathActivator.C_BOT)
-            # return and remove dups
-            return list(dict.fromkeys(path))
+        # This handles the black output in the same manner
+        if (black_output == "SUB"):
+            path.extend(PathActivator.SUB_BOT)
+        else:
+            black_letter = black_output[0]
+            black_number = int(black_output[1:])
+            path.append(PathActivator.POS_TO_PAIR[black_output])
+            if black_number % 2:
+                path.append(PathActivator.ODD_BOT)
+            if black_letter == 'C':
+                path.append(PathActivator.C_BOT)
+        # return and remove dups
+        return list(dict.fromkeys(path))
 
     # Checks if given outputs are valid
     def __isValid__(self, red_output, black_output):
@@ -149,9 +134,13 @@ class PathActivator:
         # I.C. passed all checks
         return True
 
+    # Sends a message to the RSP
     def __send_message(self, message):
         self.sender.send(message)
-
+        if (self.debug):
+            print(self.__recieve_message())
+    
+    # Recieves a message from the RSP
     def __recieve_message(self):
         return self.sender.receive()
     
