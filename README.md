@@ -3,13 +3,14 @@ This is a specific tester for RSP, programmed for Opsys and designed to run on W
 
 
 ## How to install
-In case the RSP already has the code preloaded - skip steps 1-5  
-1. Run `pip3 install pyserial`
-2. Download [Thonny IDE](https://thonny.org/)
-3. Connect the RSP device to a USB port ([Assuming it is already running micropython](https://micropython.org/download/rp2-pico/))
-4. Copy the main.py into the RSP device and start it
-5. Close Thonny (Sometimes Thonny hogs the COM-port)
-6. Reconnect the RSP to the PC 
+In case the RSP already has the code preloaded - skip steps 1-4  
+
+1. Download [Thonny IDE](https://thonny.org/)
+2. Connect the RSP device to a USB port ([Assuming it is already running micropython](https://micropython.org/download/rp2-pico/))
+3. Copy main.py into the RSP device and start it
+4. Close Thonny (Sometimes Thonny hogs the COM-port) and disconnect the RSP
+5. Connect the RSP to the PC 
+6. Run `pip3 install pyserial`
 7. Import sender.py and pathActivator.py into the project folder
 
 
