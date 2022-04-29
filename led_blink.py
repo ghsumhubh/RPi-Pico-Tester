@@ -6,7 +6,7 @@ from sender import Sender
 # can leave empty if using linux?
 s = Sender('COM5')
 while True:
-    s.send('on()')
+    s.send('led_on()')
     time.sleep(0.5)
-    s.send('off()')
+    s.send('led_off()')
     time.sleep(0.5)
