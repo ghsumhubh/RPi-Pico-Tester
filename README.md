@@ -27,7 +27,7 @@ pathActivator = PathActivator("COM5", True)
 ```
 After that in order to activate a specific path we simply type:
 ```python
-pathActivator.activate_path_to("SUB","C03)
+pathActivator.activate_path_to("SUB","C03")
 ```
 Notice the naming convention, we use C03 and not C3 for example  
 When the script is done we use 
