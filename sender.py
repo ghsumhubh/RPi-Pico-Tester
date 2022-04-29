@@ -11,12 +11,11 @@ class Sender:
         line = self.serial.read_until(self.TERMINATOR)
         return line.decode('UTF8').strip()
 
-    def send(self, text: str) -> bool:
+    def send(self, text: str):
         line = '%s\r\f' % text
         self.serial.write(line.encode('UTF8'))
-        # the line should be echoed.
-        # If it isn't, something is wrong.
-        return text == self.receive()
+        # dismiss the echo
+        self.receive()
 
     def close(self):
         self.serial.close()

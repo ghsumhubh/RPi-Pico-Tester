@@ -1,6 +1,6 @@
 from machine import Pin
 
-# a dictionary
+# a dictionary resolving each pin name to the actual pin
 name_to_pin = {
 "C14_C15" : Pin(0, Pin.OUT),
 "C12_C13" : Pin(1, Pin.OUT),
@@ -27,8 +27,6 @@ name_to_pin = {
 "led" : Pin(25, Pin.OUT)
 }
 
-
-
 def led_on():
     print("Turned on the led")
     name_to_pin["led"].value(1)
@@ -36,22 +34,24 @@ def led_on():
 def led_off():
     print("Turned off the led")
     name_to_pin["led"].value(0)
-    
-def turn_on(pinName):
-    if pinName in name_to_pin.keys():
-        name_to_pin[pinName].value(1)
-        print("Turned on "+pinName)
-    else:
-        print ("Could not turn on pin: " + pinName + " - pin doesn't exist")          
 
-
-def turn_off(pinName):
-    if pinName in name_to_pin.keys():
-        name_to_pin[pinName].value(0)
-        print("Turned off "+pinName)
+# Turns on a specified pin basd on the pin name
+def turn_on(pin_name):
+    if pin_name in name_to_pin.keys():
+        name_to_pin[pin_name].value(1)
+        print("Turned on "+pin_name)
     else:
-        print ("Could not turn off pin: " + pinName + " - pin doesn't exist")
-        
+        print ("Could not turn on pin: " + pin_name + " - pin doesn't exist")          
+
+# Turns off a specified pin basd on the pin name
+def turn_off(pin_name):
+    if pin_name in name_to_pin.keys():
+        name_to_pin[pin_name].value(0)
+        print("Turned off "+pin_name)
+    else:
+        print ("Could not turn off pin: " + pin_name + " - pin doesn't exist")
+
+# Turns off all the pins
 def reset():
     print("Turned off all pins")
     pins = name_to_pin.values()

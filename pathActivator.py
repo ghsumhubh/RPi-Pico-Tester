@@ -1,15 +1,9 @@
-from distutils.log import debug
 from sender import Sender
 import re
 
 
-# The COM port should be changed to the correct one found on the machine
-# can leave empty if using linux?
-#s.send('+2')
-
-
-
 class PathActivator:
+    # some constants
     VALID_REGEX = "[AC][0-9]{2}|SUB"
     MAX_A_VALUE = 15
     SUB_TOP = ["C_SUB_Odd_SEL1", "Odd_Even_SEL1", "C_A_CTRL1"]
@@ -35,7 +29,6 @@ class PathActivator:
         "A13" : "A12_A13",
         "A14" : "A14_A15",
         "A15" : "A14_A15",
-
         "C00" : "C0_C1",
         "C01" : "C0_C1",
         "C02" : "C2_C3",
@@ -54,7 +47,7 @@ class PathActivator:
         "C15" : "C14_C15",
     }
 
-
+    # Constructor
     def __init__(self, COM_port, debug = False):
         self.sender = Sender(COM_port)
         self.debug = debug
@@ -63,15 +56,17 @@ class PathActivator:
     def activate_path_to(self, red_output, black_output):
         path = self.__get_path_to(red_output, black_output)
         # turns off all the pins
-        self.sender.send("reset()")
-        message = self.sender.receive()
+        self.__send_message("reset()")
+        message = self.__recieve_message()
+        #I.C. in debug mode - > print
         if (self.debug):
             print (message)
-
+        
         for pin in path:
             # turns on only the pins in the path
-            self.sender.send("turn_on(\""+pin+"\")")
-            message = self.sender.receive()
+            self.__send_message("turn_on(\""+pin+"\")")
+            message = self.__recieve_message()
+            #I.C. in debug mode - > print
             if (self.debug):
                 print (message)
         
@@ -118,11 +113,13 @@ class PathActivator:
             # return and remove dups
             return list(dict.fromkeys(path))
 
+    # Checks if given outputs are valid
     def __isValid__(self, red_output, black_output):
         # Length check
         if len(red_output)!= 3 or len(black_output)!= 3:
             print("Wrong length of output, try: \"SUB or \"A01 for example")
             return False
+        
         # Regex check
         is_valid_regex = True
         red_pos = re.search(PathActivator.VALID_REGEX, red_output)
@@ -135,6 +132,7 @@ class PathActivator:
             print(black_output + " is an invalid output")
         if (is_valid_regex == False):
             return False
+        
         # Too big output number check
         if red_output[0] != 'S' and int(red_output[1:]) > PathActivator.MAX_A_VALUE:
             print("Try smaller numbers for red_output")
@@ -142,16 +140,21 @@ class PathActivator:
         if black_output[0] != 'S' and int(black_output[1:]) > PathActivator.MAX_A_VALUE:
             print("Try smaller numbers for black_output")
             return False
+
         # Impossible output combination check
-        
         if red_output[0] == black_output[0] and red_output[0] != 'S':
             if (int(int(red_output[1:])/2) != int(int(black_output[1:])/2)):
                 print("Impossible output combination")
                 return False
+        # I.C. passed all checks
         return True
 
+    def __send_message(self, message):
+        self.sender.send(message)
 
-
-
+    def __recieve_message(self):
+        return self.sender.receive()
+    
+    # Closes the sender object
     def close(self):
         self.sender.close()
