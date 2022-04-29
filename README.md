@@ -21,7 +21,7 @@ Add the following import:
 from pathActivator import PathActivator
 ```
 Next we need to make a path activator which will activate all the pins necessary  
-It recieves 2 parameters: COM-port and a boolean for activating the debug mode.
+It recieves 2 parameters: COM-port[^1] and a boolean for activating the debug mode.
 ```python
 pathActivator = PathActivator("COM5", True)
 ```
@@ -62,3 +62,5 @@ Turned on C_A_CTRL2
 ## Dependencies  
 1.  pyserial.  
 
+
+[^1]: An easy way to find the COM-port on windows is typing `mode` into the CLI, another option is to go to device manager and check there.
