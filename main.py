@@ -24,16 +24,15 @@ name_to_pin = {
 "C_SUB_Odd_SEL1" : Pin(19, Pin.OUT),
 "C_A_CTRL2" : Pin(20, Pin.OUT),
 "C_SUB_Odd_SEL2" : Pin(21, Pin.OUT),
-"led" : Pin(25, Pin.OUT)
+"GREEN_BACKLIGHT" : Pin(22,Pin.OUT),
+"RED_BACKLIGHT" : Pin(23,Pin.OUT),
+"BLUE_BACKLIGHT" : Pin(24,Pin.OUT),
+"DEBUG_LIGHT" : Pin(29,Pin.OUT)
 }
 
-def led_on():
-    print("Turned on the led")
-    name_to_pin["led"].value(1)
+#SDA Pin 26
+#SCL Pin 27
 
-def led_off():
-    print("Turned off the led")
-    name_to_pin["led"].value(0)
 
 # Turns on a specified pin basd on the pin name
 def turn_on(pin_name):
@@ -53,7 +52,9 @@ def turn_off(pin_name):
 
 # Turns off all the pins
 def reset():
-    print("Turned off all pins")
+    lcd_reset = Pin(25,Pin.OUT)
+    lcd_reset.value(1)
+    print("Reseted pins")
     pins = name_to_pin.values()
     for pin in pins:
         pin.value(0)
