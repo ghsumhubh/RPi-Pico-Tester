@@ -54,6 +54,17 @@ if len(sys.argv) == 3:
     pathActivator.display_off()
 pathActivator.close()
 ```
+Then we run `.\demo.py C13 SUB` in the CLI and get:
+```
+Turned off all pins
+Turned on C12_C13
+Turned on Odd_Even_SEL1
+Turned on C_A_CTRL1
+Turned on C_SUB_Odd_SEL2
+Turned on Odd_Even_SEL2
+Turned on C_A_CTRL2
+```
+
 ## Useful methods: 
 ```python
 activate_path_to(red,black)
@@ -90,16 +101,6 @@ clear_display()
 ```
 Clears the display text
 
-Then we run `.\demo.py C13 SUB` in the CLI and get:
-```
-Turned off all pins
-Turned on C12_C13
-Turned on Odd_Even_SEL1
-Turned on C_A_CTRL1
-Turned on C_SUB_Odd_SEL2
-Turned on Odd_Even_SEL2
-Turned on C_A_CTRL2
-```
 ## Dependencies  
 1.  pyserial.  
 
