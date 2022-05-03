@@ -68,7 +68,7 @@ Has to be done when finished with the object.
 set_display_color(color)
 ```
 Sets the display color to one of the following:
-Black, Red, Green, Yellow, Blue, Purple, Cyan, White
+Black, Red, Green, Yellow, Blue, Purple, Cyan, White  
 The default is white
 
 ```python
