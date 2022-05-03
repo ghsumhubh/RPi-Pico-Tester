@@ -38,16 +38,57 @@ to close the object -> should be done before exiting the program and NOT in the 
 
 Example code (Taken from demo.py):
 ```python
+from time import sleep
 from pathActivator import PathActivator
 import sys
 
 # specify the COM port and specify whether or not to be in debug mode
-pathActivator = PathActivator("COM5", True)
+pathActivator = PathActivator("COM6", True)
 if len(sys.argv) == 3:
     pathActivator.activate_path_to(sys.argv[1],sys.argv[2])
-
+    pathActivator.set_display_color("Blue")
+    pathActivator.set_display_text(sys.argv[1], sys.argv[2])
+    sleep(5)
+    pathActivator.set_display_text("Shutting display off")
+    sleep(3)
+    pathActivator.display_off()
 pathActivator.close()
 ```
+## Useful methods: 
+```python
+activate_path_to(red,black)
+```
+Makes sure the red and black outputs select the specific element given.
+
+```python
+close()
+```
+Has to be done when finished with the object.
+```python
+set_display_color(color)
+```
+Sets the display color to one of the following:
+Black, Red, Green, Yellow, Blue, Purple, Cyan, White
+The default is white
+
+```python
+set_display_text(message, message2="")
+```
+Sets the display text.  
+message appears on the top  
+message2 appears on the bottom
+```python
+display_on()
+```
+turns on the display (turned on by default)
+```python
+display_off()
+```
+turns off the display
+```python
+clear_display()
+```
+Clears the display text
 
 Then we run `.\demo.py C13 SUB` in the CLI and get:
 ```
