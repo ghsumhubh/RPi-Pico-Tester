@@ -1,17 +1,17 @@
 # RPi Pico Tester 
-This is a specific tester for RPi, programmed for Opsys and designed to run on Windows
+This is a specific tester for RPi, programmed for Opsys and designed to run on Windows.
 
 
 ## How to install
-In case the RPi already has the code preloaded - skip steps 1-4  
+In case the RPi already has the code preloaded - skip steps 1-4.  
 
-1. Download [Thonny IDE](https://thonny.org/)
-2. Connect the RPi device to a USB port ([Assuming it is already running micropython](https://micropython.org/download/rp2-pico/))
-3. Copy main.py into the RPi device and start it
-4. Close Thonny (Sometimes Thonny hogs the COM-port) and disconnect the RPi
-5. Connect the RPi to the PC 
-6. Run `pip3 install pyserial`
-7. Import sender.py and pathActivator.py into the project folder
+1. Download [Thonny IDE](https://thonny.org/).
+2. Connect the RPi device to a USB port ([Assuming it is already running micropython](https://micropython.org/download/rp2-pico/)).
+3. Copy main.py into the RPi device and start it.
+4. Close Thonny (Sometimes Thonny hogs the COM-port) and disconnect the RPi.
+5. Connect the RPi to the PC .
+6. Run `pip3 install pyserial`.
+7. Import sender.py and pathActivator.py into the project folder.
 
 
 ## How to use  
@@ -20,7 +20,7 @@ Add the following import:
 ```python
 from pathActivator import PathActivator
 ```
-Next we need to make a path activator which will activate all the pins necessary  
+Next we need to make a path activator which will activate all the pins necessary.  
 It recieves 2 parameters: COM-port[^1] and a boolean for activating the debug mode.
 ```python
 pathActivator = PathActivator("COM5", True)
@@ -30,11 +30,11 @@ After that in order to activate a specific path we simply type:
 pathActivator.activate_path_to("SUB","C03")
 ```
 Notice the naming convention, we use C03 and not C3 for example  
-When the script is done we use 
+When the script is done we use: 
 ```python
 pathActivator.close()
 ```
-To close the object -> should be done before exiting the program and NOT in the middle of 2 paths
+To close the object -> should be done before exiting the program and NOT in the middle of 2 paths.  
 
 Example code (Taken from demo.py):
 ```python
@@ -85,27 +85,27 @@ Has to be done when finished with the object.
 set_display_color(color)
 ```
 Sets the display color to one of the following:
-Black, Red, Green, Yellow, Blue, Purple, Cyan, White  
-The default is white
+Black; Red; Green; Yellow; Blue; Purple; Cyan; White. 
+The default is White.
 
 ```python
 set_display_text(message, message2="")
 ```
 Sets the display text.  
-message appears on the top  
-message2 appears on the bottom
+message appears on the top.   
+message2 appears on the bottom.
 ```python
 display_on()
 ```
-Turns on the display (turned on by default)
+Turns on the display (turned on by default).
 ```python
 display_off()
 ```
-Turns off the display
+Turns off the display.
 ```python
 clear_display()
 ```
-Clears the display text
+Clears the display text.
 
 ## Dependencies  
 1.  pyserial.  
