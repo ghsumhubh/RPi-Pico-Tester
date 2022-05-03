@@ -46,11 +46,12 @@ class PathActivator:
         "C14" : "C14_C15",
         "C15" : "C14_C15",
     }
-
+    DEFAULT_BACKLIGHT_COLOR = "White"
     # Constructor
     def __init__(self, COM_port, debug = False):
         self.sender = Sender(COM_port)
         self.debug = debug
+        self.__send_message("init()")
 
     # Activates all the right choices to get to the selected output
     def activate_path_to(self, red_output, black_output):
@@ -61,8 +62,6 @@ class PathActivator:
                 self.__send_message("turn_on(\""+pin+"\")")
 
         
-
-
     # Calculates all the right choices to get to the selected output
     def __get_path_to(self, red_output, black_output):
         # Here will be stored all the pins that need to be activated
@@ -147,3 +146,22 @@ class PathActivator:
     # Closes the sender object
     def close(self):
         self.sender.close()
+
+    # Changes display color
+    def set_display_color(self, color):
+        self.__send_message("backlight_color(\'" + color + "\')")
+
+    def set_display_text(self, message, message2 = ""):
+        self.__send_message("write_to_display(\'" + message + "\',\'" + message2 + "\')")
+    
+    def clear_display(self):
+        self.__send_message("clear_display()")
+        
+    def display_on(self):
+        self.__send_message("display_on()")
+        self.__send_message("backlight_color(\'" + PathActivator.DEFAULT_BACKLIGHT_COLOR  + "\')")
+        
+    def display_off(self):
+        self.__send_message("display_off()")
+        self.__send_message("backlight_color(\'Black\')")
+
