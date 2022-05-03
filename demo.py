@@ -12,5 +12,4 @@ if len(sys.argv) == 3:
     pathActivator.set_display_text("Shutting display off")
     sleep(3)
     pathActivator.display_off()
-
 pathActivator.close()
