@@ -56,13 +56,19 @@ pathActivator.close()
 ```
 Then we run `.\demo.py C13 SUB` in the CLI and get:
 ```
-Turned off all pins
+Changed display color to: White
+Reseted pins
 Turned on C12_C13
 Turned on Odd_Even_SEL1
 Turned on C_A_CTRL1
 Turned on C_SUB_Odd_SEL2
 Turned on Odd_Even_SEL2
 Turned on C_A_CTRL2
+Changed display color to: Blue
+Updated the display to: C13                  - SUB
+Updated the display to: Shutting display off -
+Display is now off
+Changed display color to: Black
 ```
 
 ## Useful methods: 
