@@ -1,15 +1,15 @@
-# RSP Pico Tester 
-This is a specific tester for RSP, programmed for Opsys and designed to run on Windows
+# RPi Pico Tester 
+This is a specific tester for RPi, programmed for Opsys and designed to run on Windows
 
 
 ## How to install
-In case the RSP already has the code preloaded - skip steps 1-4  
+In case the RPi already has the code preloaded - skip steps 1-4  
 
 1. Download [Thonny IDE](https://thonny.org/)
-2. Connect the RSP device to a USB port ([Assuming it is already running micropython](https://micropython.org/download/rp2-pico/))
-3. Copy main.py into the RSP device and start it
-4. Close Thonny (Sometimes Thonny hogs the COM-port) and disconnect the RSP
-5. Connect the RSP to the PC 
+2. Connect the RPi device to a USB port ([Assuming it is already running micropython](https://micropython.org/download/rp2-pico/))
+3. Copy main.py into the RPi device and start it
+4. Close Thonny (Sometimes Thonny hogs the COM-port) and disconnect the RPi
+5. Connect the RPi to the PC 
 6. Run `pip3 install pyserial`
 7. Import sender.py and pathActivator.py into the project folder
 
@@ -34,7 +34,7 @@ When the script is done we use
 ```python
 pathActivator.close()
 ```
-to close the object -> should be done before exiting the program and NOT in the middle of 2 paths
+To close the object -> should be done before exiting the program and NOT in the middle of 2 paths
 
 Example code (Taken from demo.py):
 ```python
@@ -97,11 +97,11 @@ message2 appears on the bottom
 ```python
 display_on()
 ```
-turns on the display (turned on by default)
+Turns on the display (turned on by default)
 ```python
 display_off()
 ```
-turns off the display
+Turns off the display
 ```python
 clear_display()
 ```
