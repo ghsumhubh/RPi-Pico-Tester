@@ -63,6 +63,7 @@ i2c_addr= 0x3c
 
 def init():
     LCD_RESET.value(1)
+    DEBUG_LIGHT.value(1)
     backlight_color("White")
     i2c.writeto_mem(i2c_addr,0x00,b'\x00') # Send command to the display
     i2c.writeto_mem(i2c_addr,0x00,b'\x38') # Function set - 8 bit, 2 line display 5x8, inst table 0
