@@ -127,7 +127,7 @@ class PathActivator:
 
         # Impossible output combination check
         if red_output[0] == black_output[0] and red_output[0] != 'S':
-            if (int(int(red_output[1:])/2) != int(int(black_output[1:])/2)):
+            if ((int(red_output[1:])%2) == ((int(black_output[1:])%2)) and int(red_output[1:]) != int(black_output[1:])  ):
                 print("Impossible output combination")
                 return False
         # I.C. passed all checks
